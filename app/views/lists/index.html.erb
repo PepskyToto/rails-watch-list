@@ -1,11 +1,19 @@
-<h1>All Lists</h1>
+<div class="container mt-4" style="background-color: #f0f8ff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);">
+  <div class="jumbotron text-center bg-primary text-white mb-4" style="border-radius: 10px;">
+    <h1 class="display-4">All Lists</h1>
+  </div>
 
-<div class="container">
-  <% @lists.each do |list| %>
-    <div class="list-item">
-      <%= link_to list.name, list_path(list) %>
-    </div>
-  <% end %>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @lists.each do |list| %>
+      <div class="col mb-4">
+        <div class="card custom-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to list.name, list_path(list), class: "custom-link text-dark" %></h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "ADD LIST", new_list_path, class: "btn btn-custom" %>
 </div>
-
-<%= link_to "ADD LIST", new_list_path %>

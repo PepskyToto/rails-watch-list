@@ -1,12 +1,28 @@
-<h1>Liste show de la :</h1>
-<h1><%= @list.name %></h1>
-
-<% @list.bookmarks.each do |bookmark| %>
-  <div id="bookmark_<%= bookmark.id %>">
-    <%= bookmark.movie.title %> - <%= bookmark.comment %> |
-    <%= link_to 'Destroy', bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, remote: true %>
-    <img src="bookmark.movie.poster_url" alt="">
+<div class="container mt-4" style="background-color: #f0f8ff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);">
+  <div class="jumbotron text-center bg-primary text-white mb-4" style="border-radius: 10px;">
+    <h1 class="display-4">List Details</h1>
+    <h2><%= @list.name %></h2>
   </div>
-<% end %>
-<%= link_to "TOUTES LES LISTS", lists_path %>
-<%= link_to "ADD BOOKMARK", new_list_bookmark_path(@list.id) %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div id="bookmark_<%= bookmark.id %>" class="card mb-3">
+          <img src="<%= bookmark.movie.poster_url %>" class="card-img-top" alt="Movie Poster" style="height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
+          <div class="card-body">
+            <h5 class="card-title"><%= bookmark.movie.title %></h5>
+            <p class="card-text"><%= bookmark.comment %></p>
+            <%= link_to 'Destroy', bookmark_path(bookmark), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, remote: true %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <div class="text-center">
+        <%= link_to "All Lists", lists_path, class: "btn btn-custom mt-3" %>
+        <%= link_to "Add Bookmark", new_list_bookmark_path(@list.id), class: "btn btn-custom mt-3" %>
+      </div>
+    </div>
+  </div>
+</div>

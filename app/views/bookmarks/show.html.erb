@@ -1,6 +1,25 @@
-<% @list.bookmarks.each do |bookmark| %>
-  <p id="bookmark_<%= bookmark.id %>">
-    <%= bookmark.movie.title %> - - - <%= bookmark.comment %> |
-    <%= link_to 'Destroy', bookmark_path(bookmark), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
-  </p>
-<% end %>
+<div class="container mt-4" style="background-color: #f0f8ff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);">
+  <div class="jumbotron text-center bg-primary text-white mb-4" style="border-radius: 10px;">
+    <h1 class="display-4">New Bookmark</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <%= simple_form_for [@list, @bookmark] do |form| %>
+        <div class="mb-3">
+          <%= form.label :movie_id, "Choose a Movie", class: "form-label" %>
+          <%= form.collection_select :movie_id, Movie.all, :id, :title, { include_blank: false }, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :comment, class: "form-label" %>
+          <%= form.input :comment, class: "form-control" %>
+        </div>
+
+        <div class="text-center">
+          <%= form.submit "Create Bookmark", class: "btn btn-custom" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
