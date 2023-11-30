@@ -1,0 +1,6 @@
+<% @list.bookmarks.each do |bookmark| %>
+  <p id="bookmark_<%= bookmark.id %>">
+    <%= bookmark.movie.title %> - - - <%= bookmark.comment %> |
+    <%= link_to 'Destroy', bookmark_path(bookmark), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+  </p>
+<% end %>

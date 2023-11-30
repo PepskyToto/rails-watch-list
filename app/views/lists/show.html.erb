@@ -1,0 +1,12 @@
+<h1>Liste show de la :</h1>
+<h1><%= @list.name %></h1>
+
+<% @list.bookmarks.each do |bookmark| %>
+  <div id="bookmark_<%= bookmark.id %>">
+    <%= bookmark.movie.title %> - <%= bookmark.comment %> |
+    <%= link_to 'Destroy', bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, remote: true %>
+    <img src="bookmark.movie.poster_url" alt="">
+  </div>
+<% end %>
+<%= link_to "TOUTES LES LISTS", lists_path %>
+<%= link_to "ADD BOOKMARK", new_list_bookmark_path(@list.id) %>
